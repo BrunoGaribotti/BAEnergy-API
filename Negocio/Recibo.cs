@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Negocio
 {
+    /// <summary>
+    /// Objeto de GVA12 (Recibos) - Comprobantes de cuenta corriente.
+    /// </summary>
     public class Recibo  //GVA12
     {
         public string COD_CLIENT = "";

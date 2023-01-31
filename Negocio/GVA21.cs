@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Negocio
 {
+    /// <summary>
+    /// Objeto de GVA12 - Encabezado del pedido.
+    /// </summary>
     public class GVA21
     {
         public List<GVA03> cGVA03 = new List<GVA03>();

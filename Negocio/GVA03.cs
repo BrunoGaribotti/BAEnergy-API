@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Negocio
 {
+    /// <summary>
+    /// Objeto de GVA03 - Renglones del pedido.
+    /// </summary>
     public class GVA03
     {
         public string ID_GVA03 = "";

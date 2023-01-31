@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Negocio
 {
+    /// <summary>
+    /// Objeto de Retorno - Devolución de Recibo al sistema BAEnergy.
+    /// </summary>
     public class RetornoRecibo
     {
         public string COD_CLIENT = "";

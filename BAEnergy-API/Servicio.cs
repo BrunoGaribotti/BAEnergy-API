@@ -31,7 +31,7 @@ namespace BAEnergy_API
         private void tProcPedidos()
         {
             BaseDeDatos db = new BaseDeDatos();
-            //Leer datos del XML (config.xml)
+            //Leer datos del XML (config.xml) 
             string msgXML = "";
             try
             {

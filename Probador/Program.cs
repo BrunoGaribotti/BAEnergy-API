@@ -8,6 +8,9 @@ using BAEnergy_API;
 
 namespace Probador
 {
+    /// <summary>
+    /// Clases para probar rápido el servicio.
+    /// </summary>
     class Program
     {
         static void Main(string[] args)

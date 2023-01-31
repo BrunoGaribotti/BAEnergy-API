@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Negocio
 {
+    /// <summary>
+    /// Objeto de Retorno - Devolución de Factura al sistema BAEnergy.
+    /// </summary>
     public class RetornoFactura
     {
         public bool estado = false;

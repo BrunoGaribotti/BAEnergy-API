@@ -15,6 +15,10 @@ namespace Negocio
         Procesos oProc = new Procesos();
         DataTable dt = new DataTable();
 
+        /// <summary>
+        /// Guarda el pedido en Tango 
+        /// <para>Tablas tocadas: GVA21 y GVA03.</para>
+        /// </summary>
         public Retorno GuardarPedido(PlantillasRecibidas.Pedido p)
         {
 

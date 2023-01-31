@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Negocio
 {
+    /// <summary>
+    /// Objeto de Factura - Contiene datos mínimos necesarios de facturación.
+    /// </summary>
     public class Factura
     {
         public string F_COMP_CAN { get; set; } //GVA07

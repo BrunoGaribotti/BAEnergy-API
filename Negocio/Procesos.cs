@@ -12,6 +12,9 @@ using Newtonsoft.Json;
 
 namespace Negocio
 {
+    /// <summary>
+    /// Contiene todos los métodos de procesos necesarios.
+    /// </summary>
     public class Procesos
     {
         DataTable dt = new DataTable();
@@ -40,6 +43,10 @@ namespace Negocio
             db.Desconectar();
             return false;
         }
+
+        /// <summary>
+        /// Completa el objeto Pedido con los datos recibidos
+        /// </summary>
         public GVA21 LlenarPedido(PlantillasRecibidas.Pedido p)
         {
             GVA21 P = new GVA21();
@@ -50,7 +57,7 @@ namespace Negocio
             P.FECHA_INGRESO = p.fecha;
             P.N_LISTA = p.n_lista;
             
-            //Esto puede cambiar si me envía la lista de precios en vez de la moenda corriente
+            //Esto puede cambiar si me envía la lista de precios en vez de la moneda corriente
             switch(p.n_lista)
             {
                 case "1": P.MON_CTE = "1"; break;
@@ -73,6 +80,10 @@ namespace Negocio
 
             return P;
         }
+
+        /// <summary>
+        /// Obtiene el código de transporte de GVA14.
+        /// </summary>
         public GVA21 GetCodTrans(BaseDeDatos db, DbDataReader dr, GVA21 P)
         {
             db.CrearComando(@"SELECT COD_CLIENT, COD_TRANSP, COND_VTA FROM GVA14 WHERE COD_CLIENT = '" + P.COD_CLIENT + "'");
@@ -89,6 +100,10 @@ namespace Negocio
             dt.Dispose();
             return P;
         }
+
+        /// <summary>
+        /// Obtiene la Direción de entrega de DIRECCION_ENTREGA.
+        /// </summary>
         public GVA21 GetDireccionEntrega(BaseDeDatos db, DbDataReader dr, GVA21 P)
         {
             db.CrearComando(@"select ID_DIRECCION_ENTREGA from direccion_entrega where HABITUAL = 'S' and HABILITADO = 'S' and COD_CLIENTE = '" + P.COD_CLIENT + "'");
@@ -104,6 +119,9 @@ namespace Negocio
             return P;
         }
 
+        /// <summary>
+        /// Obtiene la cotización de COTIZACION, MONEDA, Y TIPO_COTIZACION.
+        /// </summary>
         internal GVA21 GetCotizacion(BaseDeDatos db, DbDataReader dr, GVA21 P)
         {
             DataSet ds = new DataSet();
@@ -135,6 +153,9 @@ namespace Negocio
             return P;
         }
 
+        /// <summary>
+        /// Obtiene la Unidad de medida de STA11.
+        /// </summary>
         public GVA21 GetUnidadMedida(BaseDeDatos db, DbDataReader dr, GVA21 P)
         {
             foreach (GVA03 R in P.cGVA03)
@@ -150,6 +171,10 @@ namespace Negocio
             }
             return P;
         }
+
+        /// <summary>
+        /// Obtiene y devuelve los datos requeridos de los recibos desde GVA12, GVA07, GVA67.
+        /// </summary>
         public List<Recibo> ConsultarRecibos(BaseDeDatos db, System.IO.StreamWriter log)
         {
             List<Recibo> cRecibos = new List<Recibo>();
@@ -225,6 +250,9 @@ namespace Negocio
             return cRecibos;
         }
 
+        /// <summary>
+        /// Obtiene los datos requeridos de las facturas desde GVA12, GVA05, GVA105, GVA42.
+        /// </summary>
         public List<Factura> ConsultarFacturas(BaseDeDatos db) //ACUMULA PEDIDOS
         {
             List<Factura> cFacturas = new List<Factura>();
@@ -355,12 +383,18 @@ namespace Negocio
             return cFacturas;
         }
 
+        /// <summary>
+        /// Marca el filler para saber que ya fue procesado el recibo previamente.
+        /// </summary>
         public void MarcarFiller(BaseDeDatos db, string comando)
         {
             db.CrearComando(comando);
             db.EjecutarComando();
         }
 
+        /// <summary>
+        /// Envía los recibos al sistema BAEnergy.
+        /// </summary>
         public List<RetornoRecibo> EnviarRecibos(List<Recibo> cRecibos)
         {
             ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(
@@ -417,6 +451,9 @@ namespace Negocio
             }
         }
 
+        /// <summary>
+        /// Envía las facturas al sistema BAEnergy.
+        /// </summary>
         public List<RetornoFactura> EnviarFacturas(List<Factura> cFacturas)
         {
             ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(
@@ -473,6 +510,9 @@ namespace Negocio
             }
         }
 
+        /// <summary>
+        /// Consume los recibos todavía no procesados.
+        /// </summary>
         public void ConsumirBARecibos(BaseDeDatos db, System.IO.StreamWriter log)
         {
             //Consulta si hay recibos nuevos
@@ -507,6 +547,9 @@ namespace Negocio
             }
         }
 
+        /// <summary>
+        /// Consume las facturas todavía no procesadas.
+        /// </summary>
         public void ConsumirBAFacturas(BaseDeDatos db, System.IO.StreamWriter log)
         {
             //Consultar si hay facturas nuevas

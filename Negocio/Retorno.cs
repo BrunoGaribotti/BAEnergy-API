@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Negocio
 {
+    /// <summary>
+    /// Objeto de Retorno - Devolución OK/ERROR al sistema BAEnergy.
+    /// </summary>
     public class Retorno
     {
         public bool ESTADO = false;
